@@ -6,20 +6,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author alanm
- */
 public class TrabajadorDAO extends Connector implements DAO<TrabajadorDTO>{
 
-    private static final String SQL_INSERT="CALL insertRol(?)";
     private static final String SQL_UPDATE="CALL updateRol(?,?)";
-    private static final String SQL_DELETE="CALL deleteRol(?)";
-    private static final String SQL_READ="SELECT * FROM readRol(?)";
-    private static final String SQL_READ_ALL="SELECT * FROM readAllRol";
-    private static final String SQL_REGISTER="INSERT INTO TRABAJADOR";
+    private static final String SQL_READ="SELECT * FROM TRABAJADOR WHERE email = ?";
+    private static final String SQL_REGISTER="INSERT INTO TRABAJADOR (nombretrabajador,apellidopaterno,apellidomaterno,email,password,idRol) VALUES (?,?,?,?,?,?)";
     
     
     
@@ -41,7 +35,17 @@ public class TrabajadorDAO extends Connector implements DAO<TrabajadorDTO>{
     
     @Override
     public TrabajadorDTO get(TrabajadorDTO dto) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        TrabajadorDTO rol = new TrabajadorDTO();
+        try (Connection connection = getConnection(); PreparedStatement ps = connection.prepareStatement(SQL_READ)){
+            ps.setString(1, dto.getTrabajador().getEmail());    
+            try (ResultSet rs = ps.executeQuery()){
+                List<TrabajadorDTO> results = getResults(rs);   
+                if(!results.isEmpty()){
+                    rol = results.get(0);
+                }
+            }
+        }             
+        return rol; 
     }
 
     @Override
@@ -56,7 +60,23 @@ public class TrabajadorDAO extends Connector implements DAO<TrabajadorDTO>{
 
     @Override
     public void update(TrabajadorDTO dto) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try (Connection connection = getConnection(); PreparedStatement ps = connection.prepareStatement(SQL_UPDATE)){
+            ps.setString(1, dto.getTrabajador().getNombreTrabajador());
+            ps.setString(2, dto.getTrabajador().getApellidoMaterno());
+            ps.setString(3, dto.getTrabajador().getApellidoPaterno());
+            ps.setDate(4, dto.getTrabajador().getFechaNacimiento());
+            ps.setString(5, dto.getTrabajador().getEmail());
+            ps.setString(6, dto.getTrabajador().getPassword());
+            ps.setString(7, dto.getTrabajador().getCalle());
+            ps.setString(8, dto.getTrabajador().getColonia());
+            ps.setInt(9, dto.getTrabajador().getNumeroExterior());
+            ps.setString(10, dto.getTrabajador().getTelefono());
+            ps.setInt(11, dto.getTrabajador().getNumeroInterior());
+            ps.setInt(12, dto.getMunicipio().getIdMunicipio());
+            ps.setInt(13, dto.getEstado().getIdEstado());
+            ps.setInt(14, dto.getSucursal().getIdSucursal());
+            ps.executeUpdate();            
+        }
     }
 
     @Override
@@ -66,7 +86,19 @@ public class TrabajadorDAO extends Connector implements DAO<TrabajadorDTO>{
 
     @Override
     public List<TrabajadorDTO> getResults(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<TrabajadorDTO> resultado = new ArrayList<>();
+        while (rs.next()) {
+            TrabajadorDTO dto = new TrabajadorDTO();
+            dto.getTrabajador().setApellidoMaterno(rs.getString("apellidomaterno"));
+            dto.getTrabajador().setApellidoPaterno(rs.getString("apellidopaterno"));
+            dto.getTrabajador().setEmail(rs.getString("email"));
+            dto.getTrabajador().setIdTrabajador(rs.getInt("idtrabajador"));
+            dto.getTrabajador().setNombreTrabajador(rs.getString("nombretrabajador"));
+            dto.getRol().setIdRol(rs.getInt("idrol"));
+            dto.getSucursal().setIdSucursal(rs.getInt("idsucursal"));
+            resultado.add(dto);
+        }
+        return resultado;
     }
         
 }
