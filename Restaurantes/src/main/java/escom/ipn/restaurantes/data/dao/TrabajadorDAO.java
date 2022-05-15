@@ -11,7 +11,7 @@ import java.util.List;
 
 public class TrabajadorDAO extends Connector implements DAO<TrabajadorDTO>{
 
-    private static final String SQL_UPDATE="CALL updateRol(?,?)";
+    private static final String SQL_UPDATE="UPDATE TRABAJADOR SET nombretrabajador=?,apellidopaterno=?,apellidomaterno=?,fechanacimiento=?,email=?,password=?,calle=?,colonia=?,numeroexterior=?,telefono=?,numerointerior=?,idmunicipio=?,idestado=? WHERE idTrabajador=?";
     private static final String SQL_READ="SELECT * FROM TRABAJADOR WHERE email = ?";
     private static final String SQL_REGISTER="INSERT INTO TRABAJADOR (nombretrabajador,apellidopaterno,apellidomaterno,email,password,idRol) VALUES (?,?,?,?,?,?)";
     
@@ -33,19 +33,27 @@ public class TrabajadorDAO extends Connector implements DAO<TrabajadorDTO>{
         return null; 
     }
     
+    public TrabajadorDTO login(TrabajadorDTO dto) throws SQLException {
+        TrabajadorDTO trabajador = get(dto);
+        if(trabajador.getTrabajador().getPassword().equals(dto.getTrabajador().getPassword())){
+            return trabajador;
+        }
+        return null;
+    }
+    
     @Override
     public TrabajadorDTO get(TrabajadorDTO dto) throws SQLException {
-        TrabajadorDTO rol = new TrabajadorDTO();
+        TrabajadorDTO trabajador = new TrabajadorDTO();
         try (Connection connection = getConnection(); PreparedStatement ps = connection.prepareStatement(SQL_READ)){
             ps.setString(1, dto.getTrabajador().getEmail());    
             try (ResultSet rs = ps.executeQuery()){
                 List<TrabajadorDTO> results = getResults(rs);   
                 if(!results.isEmpty()){
-                    rol = results.get(0);
+                    trabajador = results.get(0);
                 }
             }
         }             
-        return rol; 
+        return trabajador; 
     }
 
     @Override
@@ -74,7 +82,7 @@ public class TrabajadorDAO extends Connector implements DAO<TrabajadorDTO>{
             ps.setInt(11, dto.getTrabajador().getNumeroInterior());
             ps.setInt(12, dto.getMunicipio().getIdMunicipio());
             ps.setInt(13, dto.getEstado().getIdEstado());
-            ps.setInt(14, dto.getSucursal().getIdSucursal());
+            ps.setInt(14, dto.getTrabajador().getIdTrabajador());
             ps.executeUpdate();            
         }
     }
