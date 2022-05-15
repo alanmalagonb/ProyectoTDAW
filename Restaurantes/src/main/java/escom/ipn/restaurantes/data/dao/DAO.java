@@ -4,12 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- *
- * @author alanm
- * @param <T>
- * @param <I>
- */
 public interface DAO<T>{
     T get(T dto) throws SQLException;
     List<T> getAll() throws SQLException;
