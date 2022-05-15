@@ -36,7 +36,7 @@ public class RegistrarTrabajador extends HttpServlet {
             try{
                TrabajadorDAO dao = new TrabajadorDAO();
                dto = dao.register(dto);
-               if(dueno.equals("si")) {
+               if(dueno!=null) {
                    RestauranteDTO rdto = new RestauranteDTO();
                    rdto.getDueno().setIdTrabajador(dto.getTrabajador().getIdTrabajador());
                    rdto.getRestaurante().setLogo("");
