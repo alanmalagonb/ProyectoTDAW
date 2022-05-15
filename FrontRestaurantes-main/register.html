@@ -65,6 +65,16 @@
                                             id="exampleRepeatPassword" placeholder="Repite la contraseña">
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <div class="custom-control custom-checkbox small">
+                                        <input type="checkbox" class="custom-control-input" id="dueno" onclick="checkOwner()">
+                                        <label class="custom-control-label" for="dueno">¿Eres dueño de un restaurante?</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" style="display: none;" id="restaurante"
+                                        placeholder="Nombre del Restaurante">
+                                </div>
                                 <a href="login.html" class="btn btn-primary btn-user btn-block">
                                     Registrarse
                                 </a>
@@ -73,6 +83,7 @@
                             <div class="text-center">
                                 <a class="small" href="login.html">¿Ya tienes una cuenta? Inicia sesión!</a>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -90,6 +101,17 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script>
+        function checkOwner(){
+            var checkBox = document.getElementById("dueno");
+            var input = document.getElementById("restaurante");
+            if(checkBox.checked == true){
+                input.style.display = "block";
+            } else {
+                input.style.display = "none";
+            }
+        }
+    </script>
 
 </body>
 
