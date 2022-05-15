@@ -16,7 +16,6 @@ public class TrabajadorDAO extends Connector implements DAO<TrabajadorDTO>{
     private static final String SQL_REGISTER="INSERT INTO TRABAJADOR (nombretrabajador,apellidopaterno,apellidomaterno,email,password,idRol) VALUES (?,?,?,?,?,?)";
     
     
-    
     public TrabajadorDTO register(TrabajadorDTO dto) throws SQLException {
         try (Connection connection = getConnection(); PreparedStatement ps = connection.prepareStatement(SQL_REGISTER)){
              ps.setString(1, dto.getTrabajador().getNombreTrabajador());
