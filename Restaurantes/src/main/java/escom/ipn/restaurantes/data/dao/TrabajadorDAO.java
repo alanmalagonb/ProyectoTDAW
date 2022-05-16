@@ -1,6 +1,7 @@
 package escom.ipn.restaurantes.data.dao;
 
 import escom.ipn.restaurantes.data.dto.RolDTO;
+import escom.ipn.restaurantes.data.dto.SucursalDTO;
 import escom.ipn.restaurantes.data.dto.TrabajadorDTO;
 import escom.ipn.restaurantes.storage.Connector;
 import java.sql.Connection;
@@ -18,6 +19,7 @@ public class TrabajadorDAO extends Connector implements DAO<TrabajadorDTO>{
     private static final String SQL_REGISTER="INSERT INTO TRABAJADOR (nombretrabajador,apellidopaterno,apellidomaterno,email,password,idRol) VALUES (?,?,?,?,?,?)";
     private static final String SQL_EMPLEAR="UPDATE TRABAJADOR set idSucursal=?,idRol=? WHERE idTrabajador=?";
     private static final String SQL_READ_ALL="SELECT * FROM TRABAJADOR";
+    private static final String SQL_READ_ALL_SUCURSAL="SELECT * FROM TRABAJADOR WHERE idSucursal=?";
     
     public TrabajadorDTO register(TrabajadorDTO dto) throws SQLException {
         try (Connection connection = getConnection(); PreparedStatement ps = connection.prepareStatement(SQL_REGISTER)){
@@ -50,6 +52,17 @@ public class TrabajadorDAO extends Connector implements DAO<TrabajadorDTO>{
              ps.setInt(3, dto.getTrabajador().getIdTrabajador());
              ps.executeUpdate();
         } 
+    }
+    
+    public List<TrabajadorDTO> getAllFromSucursal(SucursalDTO dto) throws SQLException{
+        List<TrabajadorDTO> trabajadores = new ArrayList<>();
+        try(Connection connection = getConnection(); PreparedStatement ps = connection.prepareStatement(SQL_READ_ALL_SUCURSAL)){
+            ps.setInt(1, dto.getSucursal().getIdSucursal());
+            try(ResultSet rs = ps.executeQuery()){
+                trabajadores.addAll(getResults(rs));
+            }
+        }
+        return trabajadores;  
     }
     
     @Override
