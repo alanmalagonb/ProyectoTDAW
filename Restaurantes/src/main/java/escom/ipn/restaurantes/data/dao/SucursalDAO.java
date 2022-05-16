@@ -14,6 +14,8 @@ public class SucursalDAO extends Connector implements DAO<SucursalDTO>{
     
     private static final String SQL_INSERT="";
     private static final String SQL_READ_ALL="SELECT * FROM SUCURSAL";
+    private static final String SQL_DELETE="DELETE FROM SUCURSAL WHERE idSucursal=?";
+    private static final String SQL_UPDATE="UPDATE FROM SUCURSAL SET =?,=?,=?,=?,=?,=? WHERE idSucursal=?";
     
     @Override
     public SucursalDTO get(SucursalDTO dto) throws SQLException {
@@ -57,12 +59,26 @@ public class SucursalDAO extends Connector implements DAO<SucursalDTO>{
 
     @Override
     public void update(SucursalDTO dto) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try (Connection connection = getConnection(); PreparedStatement ps = connection.prepareStatement(SQL_UPDATE)){
+            ps.setString(1, dto.getSucursal().getNombreSucursal());
+            ps.setInt(2, dto.getSucursal().getNumeroExterior());
+            ps.setInt(3, dto.getSucursal().getNumeroInterior());
+            ps.setString(4,  dto.getSucursal().getTelefono());
+            ps.setString(5, dto.getSucursal().getCalle());
+            ps.setString(6, dto.getSucursal().getColonia());
+            ps.setInt(7, dto.getEstado().getIdEstado());
+            ps.setInt(8, dto.getMunicipio().getIdMunicipio());
+            ps.setInt(9, dto.getSucursal().getIdSucursal());
+            ps.executeUpdate();
+        }
     }
 
     @Override
     public void delete(SucursalDTO dto) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try (Connection connection = getConnection(); PreparedStatement ps = connection.prepareStatement(SQL_DELETE)){
+            ps.setInt(1, dto.getSucursal().getIdSucursal());
+            ps.executeUpdate();            
+        } 
     }
 
     @Override
