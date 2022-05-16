@@ -1,7 +1,7 @@
 package escom.ipn.restaurantes.data.controller;
 
-import escom.ipn.restaurantes.data.dao.TrabajadorDAO;
-import escom.ipn.restaurantes.data.dto.TrabajadorDTO;
+import escom.ipn.restaurantes.data.dao.SucursalDAO;
+import escom.ipn.restaurantes.data.dto.SucursalDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -9,14 +9,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author alanm
  */
-@WebServlet(name = "IniciarSesion", urlPatterns = {"/IniciarSesion"})
-public class IniciarSesion extends HttpServlet {
+@WebServlet(name = "AgregarSucursal", urlPatterns = {"/AgregarSucursal"})
+public class AgregarSucursal extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,28 +32,26 @@ public class IniciarSesion extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String nombre = request.getParameter("nombre");
-            String apellidoMaterno = request.getParameter("materno");
-            String apellidoPaterno = request.getParameter("paterno");
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-            TrabajadorDTO dto = new TrabajadorDTO();
-            dto.getTrabajador().setNombreTrabajador(nombre);
-            dto.getTrabajador().setApellidoMaterno(apellidoMaterno);
-            dto.getTrabajador().setApellidoPaterno(apellidoPaterno);
-            dto.getTrabajador().setEmail(email);
-            dto.getTrabajador().setPassword(password);
+            String calle = request.getParameter("calle");
+            String colonia = request.getParameter("colonia");
+            int noExt = Integer.parseInt(request.getParameter("exterior"));
+            int noInt = Integer.parseInt(request.getParameter("interior"));;
+            int idMunicipio = Integer.parseInt(request.getParameter("municipio"));
+            int idEstado = Integer.parseInt(request.getParameter("estado"));
+            SucursalDTO dto = new SucursalDTO();
+            dto.getSucursal().setNombreSucursal(nombre);
+            dto.getSucursal().setCalle(calle);
+            dto.getSucursal().setColonia(colonia);
+            dto.getSucursal().setNumeroExterior(noExt);
+            dto.getSucursal().setNumeroInterior(noInt);
+            dto.getMunicipio().setIdMunicipio(idMunicipio);
+            dto.getEstado().setIdEstado(idEstado);
             try{
-                TrabajadorDAO dao = new TrabajadorDAO();
-                dto = dao.login(dto);
-                
+                SucursalDAO dao = new SucursalDAO();
+                dao.save(dto);
             }catch(Exception e){
                 e.printStackTrace();
-            } finally {
-                HttpSession session = request.getSession(true);
-                session.setAttribute("user", dto);
             }
-            
-            
         }
     }
 

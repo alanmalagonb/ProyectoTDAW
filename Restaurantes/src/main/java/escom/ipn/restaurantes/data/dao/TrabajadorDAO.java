@@ -17,7 +17,7 @@ public class TrabajadorDAO extends Connector implements DAO<TrabajadorDTO>{
     private static final String SQL_UPDATE="UPDATE TRABAJADOR SET nombretrabajador=?,apellidopaterno=?,apellidomaterno=?,fechanacimiento=?,email=?,password=?,calle=?,colonia=?,numeroexterior=?,telefono=?,numerointerior=?,idmunicipio=?,idestado=? WHERE idTrabajador=?";
     private static final String SQL_READ="SELECT * FROM TRABAJADOR WHERE email = ?";
     private static final String SQL_REGISTER="INSERT INTO TRABAJADOR (nombretrabajador,apellidopaterno,apellidomaterno,email,password,idRol) VALUES (?,?,?,?,?,?)";
-    private static final String SQL_EMPLEAR="UPDATE TRABAJADOR set idSucursal=?,idRol=? WHERE idTrabajador=?";
+    private static final String SQL_EMPLEAR="UPDATE TRABAJADOR set idSucursal=?,idRol=? WHERE idTrabajador=(SELECT idTrabajador WHERE email=?)";
     private static final String SQL_READ_ALL="SELECT * FROM TRABAJADOR";
     private static final String SQL_READ_ALL_SUCURSAL="SELECT * FROM TRABAJADOR WHERE idSucursal=?";
     
@@ -49,7 +49,7 @@ public class TrabajadorDAO extends Connector implements DAO<TrabajadorDTO>{
         try (Connection connection = getConnection(); PreparedStatement ps = connection.prepareStatement(SQL_EMPLEAR)){
              ps.setInt(1, dto.getSucursal().getIdSucursal());
              ps.setInt(2, dto.getRol().getIdRol());
-             ps.setInt(3, dto.getTrabajador().getIdTrabajador());
+             ps.setString(3, dto.getTrabajador().getEmail());
              ps.executeUpdate();
         } 
     }

@@ -9,14 +9,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author alanm
  */
-@WebServlet(name = "IniciarSesion", urlPatterns = {"/IniciarSesion"})
-public class IniciarSesion extends HttpServlet {
+@WebServlet(name = "AgregarTrabajadorSucursal", urlPatterns = {"/AgregarTrabajadorSucursal"})
+public class AgregarTrabajadorSucursal extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,29 +31,28 @@ public class IniciarSesion extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String nombre = request.getParameter("nombre");
-            String apellidoMaterno = request.getParameter("materno");
-            String apellidoPaterno = request.getParameter("paterno");
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet AgregarTrabajadorSucursal</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet AgregarTrabajadorSucursal at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
             String email = request.getParameter("email");
-            String password = request.getParameter("password");
+            int idRol = Integer.parseInt(request.getParameter("rol"));
+            int idSucursal = Integer.parseInt(request.getParameter("sucursal"));
             TrabajadorDTO dto = new TrabajadorDTO();
-            dto.getTrabajador().setNombreTrabajador(nombre);
-            dto.getTrabajador().setApellidoMaterno(apellidoMaterno);
-            dto.getTrabajador().setApellidoPaterno(apellidoPaterno);
             dto.getTrabajador().setEmail(email);
-            dto.getTrabajador().setPassword(password);
+            dto.getRol().setIdRol(idRol);
+            dto.getSucursal().setIdSucursal(idSucursal);
             try{
                 TrabajadorDAO dao = new TrabajadorDAO();
-                dto = dao.login(dto);
-                
+                dao.emplearSucursal(dto);
             }catch(Exception e){
                 e.printStackTrace();
-            } finally {
-                HttpSession session = request.getSession(true);
-                session.setAttribute("user", dto);
             }
-            
-            
         }
     }
 
