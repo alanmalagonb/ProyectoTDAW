@@ -1,6 +1,5 @@
 package escom.ipn.restaurantes.data.dao;
 
-import escom.ipn.restaurantes.data.dto.RolDTO;
 import escom.ipn.restaurantes.data.dto.SucursalDTO;
 import escom.ipn.restaurantes.data.dto.TrabajadorDTO;
 import escom.ipn.restaurantes.storage.Connector;
@@ -85,7 +84,7 @@ public class TrabajadorDAO extends Connector implements DAO<TrabajadorDTO>{
         List<TrabajadorDTO> trabajadores = new ArrayList<>();
         try(Connection connection = getConnection(); Statement s = connection.createStatement();
             ResultSet rs = s.executeQuery(SQL_READ_ALL)){
-            trabajadores.addAll(getResults(rs));
+            trabajadores = getResults(rs);
         }
         return trabajadores;  
     }

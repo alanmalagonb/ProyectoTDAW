@@ -27,7 +27,7 @@ public class SucursalDAO extends Connector implements DAO<SucursalDTO>{
         List<SucursalDTO> sucursales = new ArrayList<>();
         try(Connection connection = getConnection(); Statement s = connection.createStatement();
             ResultSet rs = s.executeQuery(SQL_READ_ALL)){
-            sucursales.addAll(getResults(rs));
+            sucursales = getResults(rs);
         }
         return sucursales;
     }

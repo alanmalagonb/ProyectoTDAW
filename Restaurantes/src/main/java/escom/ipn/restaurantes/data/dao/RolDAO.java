@@ -60,7 +60,7 @@ public class RolDAO extends Connector implements DAO<RolDTO>{
         List<RolDTO> rols = new ArrayList<>();
         try(Connection connection = getConnection(); Statement s = connection.createStatement();
             ResultSet rs = s.executeQuery(SQL_READ_ALL)){
-            rols.addAll(getResults(rs));
+            rols = getResults(rs);
         }
         return rols;   
     }
