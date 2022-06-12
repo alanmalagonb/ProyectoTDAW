@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>Administrador - Dashboard</title>
 
     <!-- Custom fonts for this template-->
@@ -148,30 +147,6 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -196,11 +171,39 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    <div class="container" style="display: flex; flex-direction: column; align-items: center;">
-                        <h1>Receta</h1>
-                        <embed src="./menu.pdf" width="1000" height="1000" alt="pdf">
-                    </div>
+                <div class="container-fluid" style="display: flex; flex-direction: column; align-items: center; max-width: 60vw;">
+                    <!-- Content Row -->
+                        <form>
+                            <div style="display: flex; justify-content:center;">
+                                <h1>Editar Trabajador</h1>
+                            </div>
+                            <div class="row g-3">
+                                <label for="formGroupExampleInput" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="formGroupExampleInput" placeholder="juanperez@email.com" style="margin-bottom: 20px;" required>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Selecciona la sucursal</option>
+                                    <option value="sucursal1">Sucursal 1</option>
+                                    <option value="sucursal2">Sucursal 2</option>
+                                    <option value="sucursal3">Sucursal 3</option>
+                                    <option value="sucursal4">Sucursal 4</option>
+                                    <option value="sucursal5">Sucursal 5</option>
+                                    <option value="sucursal6">Sucursal 6</option>
+                                    <option value="sucursal7">Sucursal 7</option>
+                                    <option value="sucursal8">Sucursal 8</option>
+                                    <option value="sucursal9">Sucursal 9</option>
+                                    <option value="sucursal10">Sucursal 10</option>
+                                </select>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Selecciona el rol</option>
+                                    <option value="cocina">Cocina</option>
+                                    <option value="limpieza">Limpieza</option>
+                                    <option value="administracion">Administración</option>
+                                    <option value="logistica">Logistica</option>
+
+                                </select>
+                                <button type="submit" class="btn btn-primary" style="margin-top: 20px; width: 150px;">Agregar</button>
+                            </div>
+                            </form>
 
                 </div>
                 <!-- /.container-fluid -->

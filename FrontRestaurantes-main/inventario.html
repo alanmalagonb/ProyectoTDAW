@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>Administrador - Dashboard</title>
 
     <!-- Custom fonts for this template-->
@@ -148,30 +147,6 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -181,26 +156,13 @@
                                     src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
-                            <!-- <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    Cerrar sesión
                                 </a>
-                            </div> -->
+                            </div>
                         </li>
 
                     </ul>
@@ -209,13 +171,61 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <div class="container-fluid" style="display: flex; flex-direction: column; align-items: center; max-width: 60vw;">
                     <!-- Content Row -->
-                    <div class="row">
-
-                        <h1>Hola</h1>
-
-                    </div>
+                        <form>
+                            <div style="display: flex; justify-content:center;">
+                                <h1>Inventario</h1>
+                            </div>
+                            <div class="row g-3">
+                                <label for="formGroupExampleInput" class="form-label">Nombre Ingrediente</label>
+                                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Cebolla" style="margin-bottom: 20px;" required">
+                                <label for="formGroupExampleInput" class="form-label">Stock</label>
+                                <input type="number" class="form-control" id="formGroupExampleInput" placeholder="Stock necesario" style="margin-bottom: 20px;" required">
+                                <input type="number" class="form-control" id="formGroupExampleInput" placeholder="Stock Actual" style="margin-bottom: 20px;" required">
+                                <div class="row g-3">
+                                    <select class="form-select col" aria-label="Default select example" style="margin-left: 12px;">
+                                        <option selected>Medición</option>
+                                        <option value="sucursal1">kg</option>
+                                        <option value="sucursal2">gr</option>
+                                        <option value="sucursal2">oz</option>
+                                        <option value="sucursal2">lb</option>
+                                        
+                                    </select>
+                                    <div class="col">
+                                        <button type="submit" class="btn btn-primary col" style="margin-top: 20px; width: 150px;">Agregar</button>
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                        <table class="table" style="margin-top: 40px;">
+                            <thead>
+                              <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Stock A</th>
+                                <th scope="col">Stock N</th>
+                                <th scope="col">Med</th>
+                                <th scope="col">Acción</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Cebolla</td>
+                                <td>
+                                    <form action="#">
+                                        <input type="number" id="quantity" name="quantity" min="1" max="99">
+                                        <button type="button">Aceptar</button>
+                                      </form>
+                                </td>
+                                <td>50</td>
+                                <td>kg</td>
+                                <td><a href="./editarInventario.html"><div style="width: 15px; height: 15px; background-image: url('./img/pencil-square.svg'); background-size: cover;"></div></i></a></td>
+                                <td><a href="./editarInventario.html
+                                    "><div style="width: 15px; height: 15px; background-image: url('./img/trash-fill.svg'); background-size: cover;"></div></i></a></td>
+                              </tr>
+                              
+                            </tbody>
+                          </table>
 
                 </div>
                 <!-- /.container-fluid -->
@@ -250,15 +260,15 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Seguro que quieres salir?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Selecciona "Salir" debajo si estás listo para salir.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="login.html">Salir</a>
                 </div>
             </div>
         </div>

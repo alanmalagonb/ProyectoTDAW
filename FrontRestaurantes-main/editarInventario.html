@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>Administrador - Dashboard</title>
 
     <!-- Custom fonts for this template-->
@@ -148,30 +147,6 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -196,11 +171,33 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    <div class="container" style="display: flex; flex-direction: column; align-items: center;">
-                        <h1>Receta</h1>
-                        <embed src="./menu.pdf" width="1000" height="1000" alt="pdf">
-                    </div>
+                <div class="container-fluid" style="display: flex; flex-direction: column; align-items: center; max-width: 60vw;">
+                    <!-- Content Row -->
+                        <form>
+                            <div style="display: flex; justify-content:center;">
+                                <h1>Editar inventario</h1>
+                            </div>
+                            <div class="row g-3">
+                                <label for="formGroupExampleInput" class="form-label">Nombre Ingrediente</label>
+                                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Cebolla" style="margin-bottom: 20px;" required">
+                                <label for="formGroupExampleInput" class="form-label">Stock</label>
+                                <input type="number" class="form-control" id="formGroupExampleInput" placeholder="Stock necesario" style="margin-bottom: 20px;" required">
+                                <input type="number" class="form-control" id="formGroupExampleInput" placeholder="Stock Actual" style="margin-bottom: 20px;" required">
+                                <div class="row g-3">
+                                    <select class="form-select col" aria-label="Default select example" style="margin-left: 12px;">
+                                        <option selected>Medición</option>
+                                        <option value="sucursal1">kg</option>
+                                        <option value="sucursal2">gr</option>
+                                        <option value="sucursal2">oz</option>
+                                        <option value="sucursal2">lb</option>
+                                        
+                                    </select>
+                                    <div class="col">
+                                        <button type="submit" class="btn btn-primary col" style="margin-top: 20px; width: 150px;">Agregar</button>
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
 
                 </div>
                 <!-- /.container-fluid -->
