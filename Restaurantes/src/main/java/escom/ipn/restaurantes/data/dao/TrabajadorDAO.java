@@ -129,6 +129,7 @@ public class TrabajadorDAO extends Connector implements DAO<TrabajadorDTO>{
             dto.getTrabajador().setApellidoPaterno(rs.getString("apellidopaterno"));
             dto.getTrabajador().setEmail(rs.getString("email"));
             dto.getTrabajador().setIdTrabajador(rs.getInt("idtrabajador"));
+            dto.getTrabajador().setPassword(rs.getString("password"));
             dto.getTrabajador().setNombreTrabajador(rs.getString("nombretrabajador"));
             dto.getRol().setIdRol(rs.getInt("idrol"));
             dto.getSucursal().setIdSucursal(rs.getInt("idsucursal"));

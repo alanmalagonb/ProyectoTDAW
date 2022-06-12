@@ -6,6 +6,7 @@ import escom.ipn.restaurantes.data.dto.RestauranteDTO;
 import escom.ipn.restaurantes.data.dto.TrabajadorDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +20,7 @@ public class RegistrarTrabajador extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
+            System.out.println("HOLAAAA");
             String nombre = request.getParameter("nombre");
             String apellidoMaterno = request.getParameter("materno");
             String apellidoPaterno = request.getParameter("paterno");
@@ -33,6 +35,12 @@ public class RegistrarTrabajador extends HttpServlet {
             dto.getTrabajador().setApellidoPaterno(apellidoPaterno);
             dto.getTrabajador().setEmail(email);
             dto.getTrabajador().setPassword(password);
+            dto.getRol().setIdRol(1);
+            if(dueno != null)
+                dto.getRol().setIdRol(1);
+            else
+                dto.getRol().setIdRol(2);
+            
             try{
                TrabajadorDAO dao = new TrabajadorDAO();
                dto = dao.register(dto);
@@ -42,10 +50,11 @@ public class RegistrarTrabajador extends HttpServlet {
                    rdto.getRestaurante().setLogo("");
                    rdto.getRestaurante().setNombreRestaurante(nombreRestaurante);
                    RestauranteDAO rdao = new RestauranteDAO();
-                   rdao.save(rdto);
+                   rdto = rdao.save(rdto);
                }
-            }catch(Exception e){
-               e.printStackTrace();
+               response.sendRedirect("login.html");
+            }catch(IOException | SQLException e){
+               out.println(e.getMessage());
             }
             /* SESIÓN */
         }

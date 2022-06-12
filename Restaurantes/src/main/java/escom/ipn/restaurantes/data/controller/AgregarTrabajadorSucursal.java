@@ -30,18 +30,8 @@ public class AgregarTrabajadorSucursal extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AgregarTrabajadorSucursal</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AgregarTrabajadorSucursal at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
             String email = request.getParameter("email");
-            int idRol = Integer.parseInt(request.getParameter("rol"));
+            int idRol = 2;
             int idSucursal = Integer.parseInt(request.getParameter("sucursal"));
             TrabajadorDTO dto = new TrabajadorDTO();
             dto.getTrabajador().setEmail(email);

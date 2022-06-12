@@ -1,6 +1,8 @@
 package escom.ipn.restaurantes.data.controller;
 
+import escom.ipn.restaurantes.data.dao.RestauranteDAO;
 import escom.ipn.restaurantes.data.dao.TrabajadorDAO;
+import escom.ipn.restaurantes.data.dto.RestauranteDTO;
 import escom.ipn.restaurantes.data.dto.TrabajadorDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,27 +33,34 @@ public class IniciarSesion extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            String nombre = request.getParameter("nombre");
-            String apellidoMaterno = request.getParameter("materno");
-            String apellidoPaterno = request.getParameter("paterno");
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             TrabajadorDTO dto = new TrabajadorDTO();
-            dto.getTrabajador().setNombreTrabajador(nombre);
-            dto.getTrabajador().setApellidoMaterno(apellidoMaterno);
-            dto.getTrabajador().setApellidoPaterno(apellidoPaterno);
             dto.getTrabajador().setEmail(email);
             dto.getTrabajador().setPassword(password);
             try{
                 TrabajadorDAO dao = new TrabajadorDAO();
                 dto = dao.login(dto);
-                
+                if(dto == null){
+                    response.sendRedirect("login.html");
+                } else{
+                    HttpSession session = request.getSession(true);
+                    session.setAttribute("user", dto);
+                    if(dto.getRol().getIdRol() == 1){
+                        response.sendRedirect("dueno.html");
+                        RestauranteDAO rdao = new RestauranteDAO();
+                        RestauranteDTO rdto;
+                        rdto = rdao.getByOwner(dto);
+                        session.setAttribute("restaurante", rdto.getRestaurante());
+                    }else{
+                        response.sendRedirect("trabajador.html");
+                    
+                    }
+                }
             }catch(Exception e){
-                e.printStackTrace();
+                out.println(e.getMessage());
             } finally {
-                HttpSession session = request.getSession(true);
-                session.setAttribute("user", dto);
+                
             }
             
             
