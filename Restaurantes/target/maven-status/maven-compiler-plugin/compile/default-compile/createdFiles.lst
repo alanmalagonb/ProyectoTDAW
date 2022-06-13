@@ -15,6 +15,7 @@ escom\ipn\restaurantes\storage\PostgreSQLSource.class
 escom\ipn\restaurantes\data\dto\IngredienteDTO.class
 escom\ipn\restaurantes\data\dao\DAO.class
 escom\ipn\restaurantes\data\pojo\Ingrediente.class
+utils\Catalogos.class
 escom\ipn\restaurantes\data\pojo\TrabajadorSucursal.class
 escom\ipn\restaurantes\data\dto\HorarioLaboralDTO.class
 escom\ipn\restaurantes\storage\Connector.class
@@ -22,6 +23,7 @@ escom\ipn\restaurantes\data\dto\TrabajadorDTO.class
 escom\ipn\restaurantes\data\dto\IngredienteRecetaDTO.class
 escom\ipn\restaurantes\data\dto\HorarioSucursalDTO.class
 escom\ipn\restaurantes\data\dto\SeccionMenuDTO.class
+escom\ipn\restaurantes\data\controller\SendEmailUsingJavaOutlook$1.class
 escom\ipn\restaurantes\data\pojo\Estado.class
 escom\ipn\restaurantes\data\controller\CerrarSesion.class
 escom\ipn\restaurantes\data\dto\DTO.class
@@ -48,5 +50,5 @@ escom\ipn\restaurantes\data\dto\PermisoDTO.class
 escom\ipn\restaurantes\data\dto\MunicipioDTO.class
 escom\ipn\restaurantes\data\controller\AgregarTrabajadorSucursal.class
 escom\ipn\restaurantes\data\dto\RolDTO.class
-escom\ipn\restaurantes\data\controller\RecuperarContrasena$1.class
 escom\ipn\restaurantes\data\dao\SucursalDAO.class
+escom\ipn\restaurantes\data\controller\SendEmailUsingJavaOutlook.class

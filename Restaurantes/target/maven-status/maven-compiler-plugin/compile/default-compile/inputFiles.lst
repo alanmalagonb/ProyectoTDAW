@@ -7,6 +7,7 @@ C:\Users\alanm\Documents\GitHub\ProyectoTDAW\Restaurantes\src\main\java\escom\ip
 C:\Users\alanm\Documents\GitHub\ProyectoTDAW\Restaurantes\src\main\java\escom\ipn\restaurantes\data\dto\IngredienteDTO.java
 C:\Users\alanm\Documents\GitHub\ProyectoTDAW\Restaurantes\src\main\java\escom\ipn\restaurantes\data\dto\EstadoDTO.java
 C:\Users\alanm\Documents\GitHub\ProyectoTDAW\Restaurantes\src\main\java\escom\ipn\restaurantes\data\pojo\Medida.java
+C:\Users\alanm\Documents\GitHub\ProyectoTDAW\Restaurantes\src\main\java\utils\Catalogos.java
 C:\Users\alanm\Documents\GitHub\ProyectoTDAW\Restaurantes\src\main\java\escom\ipn\restaurantes\data\controller\IniciarSesion.java
 C:\Users\alanm\Documents\GitHub\ProyectoTDAW\Restaurantes\src\main\java\escom\ipn\restaurantes\data\controller\RegistrarTrabajador.java
 C:\Users\alanm\Documents\GitHub\ProyectoTDAW\Restaurantes\src\main\java\escom\ipn\restaurantes\data\dto\DiaSemanaDTO.java
@@ -35,6 +36,7 @@ C:\Users\alanm\Documents\GitHub\ProyectoTDAW\Restaurantes\src\main\java\escom\ip
 C:\Users\alanm\Documents\GitHub\ProyectoTDAW\Restaurantes\src\main\java\escom\ipn\restaurantes\data\dto\IngredienteRecetaDTO.java
 C:\Users\alanm\Documents\GitHub\ProyectoTDAW\Restaurantes\src\main\java\escom\ipn\restaurantes\data\dto\DTO.java
 C:\Users\alanm\Documents\GitHub\ProyectoTDAW\Restaurantes\src\main\java\escom\ipn\restaurantes\data\pojo\Estado.java
+C:\Users\alanm\Documents\GitHub\ProyectoTDAW\Restaurantes\src\main\java\escom\ipn\restaurantes\data\controller\SendEmailUsingJavaOutlook.java
 C:\Users\alanm\Documents\GitHub\ProyectoTDAW\Restaurantes\src\main\java\escom\ipn\restaurantes\data\pojo\HorarioSucursal.java
 C:\Users\alanm\Documents\GitHub\ProyectoTDAW\Restaurantes\src\main\java\escom\ipn\restaurantes\data\pojo\TrabajadorSucursal.java
 C:\Users\alanm\Documents\GitHub\ProyectoTDAW\Restaurantes\src\main\java\escom\ipn\restaurantes\data\pojo\Ingrediente.java
