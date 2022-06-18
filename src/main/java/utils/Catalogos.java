@@ -25,7 +25,11 @@ public class Catalogos {
     private static final String SQL_READ_MUNICIPIOS = "SELECT * FROM municipio";
     
     public static Connection getConnection(){
-        PostgreSQLSource connectionp = new PostgreSQLSource("restaurantes","localhost","5432","postgres","n0m3l0");
+        PostgreSQLSource connectionp = new PostgreSQLSource("d3d50dc89srr3j",
+                "ec2-23-23-182-238.compute-1.amazonaws.com",
+                "5432",
+                "rfunwxtbklkqzx",
+                "8f4b0b21abbef83e67e07554fd8ecc9f508f23ceba78d30cb8094c0b3bd848d3");
         return connectionp.getConnection();
     }
     
