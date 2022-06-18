@@ -66,7 +66,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones</h6>
-                        <a class="collapse-item" href="datos.html">Datos</a>
+                        <a class="collapse-item" href="datos.jsp">Datos</a>
                     </div>
                 </div>
             </li>
@@ -82,7 +82,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones</h6>
-                        <a class="collapse-item" href="sucursales.html">Sucursales</a>
+                        <a class="collapse-item" href="sucursales.jsp">Sucursales</a>
                     </div>
                 </div>
             </li>
@@ -96,27 +96,27 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones</h6>
-                        <a class="collapse-item" href="inventario.html">Inventario</a>
+                        <a class="collapse-item" href="inventario.jsp">Inventario</a>
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="receta.html">
+                <a class="nav-link" href="receta.jsp">
                     <i class="fa-solid fa-file-waveform"></i>
                     <span>Receta</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="menu.html">
+                <a class="nav-link" href="menu.jsp">
                     <i class="fa-solid fa-burger"></i>
                     <span>Menu</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="trabajadores.html">
+                <a class="nav-link" href="trabajadores.jsp">
                     <i class="fa-solid fa-users-line"></i>
                     <span>Trabajadores</span></a>
             </li>
@@ -147,30 +147,6 @@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
@@ -209,17 +185,96 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    <!-- Content Row -->
-                    <div class="row">
-
-                        <h1>Hola</h1>
-
+                <div class="container-fluid" style="display: flex; flex-direction: column; align-items: center; max-width: 60vw;">
+                    <div style="background:white; border-radius: 10px; padding: 10px; box-shadow: 3px 3px 5px 5px lightgray; width: 100%">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Agregar Ingrediente</h6>
+                        </div>
+                        <div class="card-body">
+                            <form style="padding: 20px">
+                                <div class="mb-3">
+                                    <label for="formGroupExampleInput" class="form-label">Datos Ingrediente</label>
+                                    <div class="row">
+                                        <div class="col">
+                                            <input type="text" id="Nombre" name="Nombre" class="form-control" placeholder="Nombre Ingrediente" aria-label="Nombre Ingrediente" required>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <div class="row">
+                                        <div class="col">
+                                            <input type="number" min="1" id="StcokActual" name="StcokActual" class="form-control" placeholder="Stock necesario" aria-label="Stock necesario" required>
+                                        </div>
+                                        <div class="col">
+                                            <input type="number" min="0" id="StcokNecesario" name="StcokNecesario" class="form-control" placeholder="Stock actual" aria-label="Stock actual" required>
+                                        </div>
+                                        <div class="col">
+                                            <select id="Medida" name="Medida" class="custom-select custom-select-sm form-control form-control-sm" aria-label="Default select example">
+                                                <option id='0'>Selecciona Medida</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="button__submit" style="display: flex; justify-content: center;">
+                                        <button type="submit" class="btn btn-primary" style="margin-top: 20px; width: 150px;">Agregar</button>
+                                    </div>
+                                </div>
+    
+                            </form>
+                        </div>
                     </div>
-
+                    <br/>
+                    <div style="background:white; border-radius: 10px; padding: 10px; box-shadow: 3px 3px 5px 5px lightgray; width: 100%;">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Lista Ingredientes</h6>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr style="background-color: #4e73df;">
+                                        <th scope="col"><font color="white">Nombre</font></th>
+                                        <th scope="col"><font color="white">Stock<br/>necesario</font></th>
+                                        <th scope="col"><font color="white">Stock<br/>actual</font></th>
+                                        <th scope="col"><font color="white">Unidad<br/>medida</font></th>
+                                        <th scope="col"><font color="white">Accion</font></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Carne</td>
+                                        <td>50</td>
+                                        <td>1</td>
+                                        <td>KG</td>
+                                        <td align="center">
+                                            <a class="btn btn-warning ">Editar</a>
+                                            <a class="btn btn-danger ">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Carne</td>
+                                        <td>50</td>
+                                        <td>1</td>
+                                        <td>KG</td>
+                                        <td align="center">
+                                            <a class="btn btn-warning ">Editar</a>
+                                            <a class="btn btn-danger ">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Carne</td>
+                                        <td>50</td>
+                                        <td>1</td>
+                                        <td>KG</td>
+                                        <td align="center">
+                                            <a class="btn btn-warning ">Editar</a>
+                                            <a class="btn btn-danger ">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.container-fluid -->
-
+                <br/>
             </div>
             <!-- End of Main Content -->
 

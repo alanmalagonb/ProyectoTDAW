@@ -20,9 +20,11 @@ import java.util.logging.Logger;
 public class Catalogos {
     private static HashMap<Integer,String> estados = new HashMap<>();
     private static HashMap<Integer,String> municipios = new HashMap<>();
+    private static HashMap<Integer,String> roles = new HashMap<>();
     
     private static final String SQL_READ_ESTADOS = "SELECT * FROM ESTADO";
     private static final String SQL_READ_MUNICIPIOS = "SELECT * FROM municipio";
+    private static final String SQL_READ_ROLES = "SELECT * FROM rol where idrol > 1";
     
     public static Connection getConnection(){
         PostgreSQLSource connectionp = new PostgreSQLSource("d3d50dc89srr3j",
@@ -48,6 +50,13 @@ public class Catalogos {
         } catch (SQLException ex) {
             Logger.getLogger(Catalogos.class.getName()).log(Level.SEVERE, null, ex);
         }
+        try(Connection connection = getConnection(); Statement s = connection.createStatement();
+            ResultSet rs = s.executeQuery(SQL_READ_ROLES)){
+            while (rs.next()) 
+                roles.put(rs.getInt("idrol"), rs.getString("nombrerol"));
+        } catch (SQLException ex) {
+            Logger.getLogger(Catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 
@@ -58,6 +67,12 @@ public class Catalogos {
     public static HashMap<Integer, String> getMunicipios() {
         return municipios;
     }
+
+    public static HashMap<Integer, String> getRoles() {
+        return roles;
+    }
+    
+    
     
     
 }

@@ -244,6 +244,7 @@
                                             <option value="<%= sdto.getEstado().getIdEstado() %>"><%= sdto.getEstado().getNombreEstado() %></option>
                                            <% 
                                                 HashMap<Integer,String> estados = new HashMap<>();
+                                                estados = Catalogos.getEstados();
                                                 estados.remove(sdto.getEstado().getIdEstado());
                                                 for(Map.Entry<Integer, String> entry: estados.entrySet()){
                                                     int key = entry.getKey();
@@ -263,6 +264,7 @@
                                             <option value="<%= sdto.getMunicipio().getIdMunicipio() %>"><%= sdto.getMunicipio().getNombreMunicipio() %></option>
                                             <% 
                                                  HashMap<Integer,String> municipios = new HashMap<>();
+                                                 municipios = Catalogos.getMunicipios();
                                                  municipios.remove(sdto.getMunicipio().getIdMunicipio());
                                                 for(Map.Entry<Integer, String> entry: municipios.entrySet()){
                                                     int key = entry.getKey();

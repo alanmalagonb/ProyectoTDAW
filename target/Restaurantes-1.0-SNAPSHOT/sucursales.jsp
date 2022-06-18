@@ -83,7 +83,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones</h6>
-                        <a class="collapse-item" href="datos.html">Datos</a>
+                        <a class="collapse-item" href="datos.jsp">Datos</a>
                     </div>
                 </div>
             </li>
@@ -99,7 +99,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones</h6>
-                        <a class="collapse-item" href="sucursales.html">Sucursales</a>
+                        <a class="collapse-item" href="sucursales.jsp">Sucursales</a>
                     </div>
                 </div>
             </li>
@@ -113,27 +113,27 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones</h6>
-                        <a class="collapse-item" href="inventario.html">Inventario</a>
+                        <a class="collapse-item" href="inventario.jsp">Inventario</a>
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="receta.html">
+                <a class="nav-link" href="receta.jsp">
                     <i class="fa-solid fa-file-waveform"></i>
                     <span>Receta</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="menu.html">
+                <a class="nav-link" href="menu.jsp">
                     <i class="fa-solid fa-burger"></i>
                     <span>Menu</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="trabajadores.html">
+                <a class="nav-link" href="trabajadores.jsp">
                     <i class="fa-solid fa-users-line"></i>
                     <span>Trabajadores</span></a>
             </li>

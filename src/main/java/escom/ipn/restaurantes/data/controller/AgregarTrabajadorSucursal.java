@@ -31,7 +31,7 @@ public class AgregarTrabajadorSucursal extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             String email = request.getParameter("email");
-            int idRol = 2;
+            int idRol = Integer.parseInt(request.getParameter("rol"));
             int idSucursal = Integer.parseInt(request.getParameter("sucursal"));
             TrabajadorDTO dto = new TrabajadorDTO();
             dto.getTrabajador().setEmail(email);
@@ -39,7 +39,8 @@ public class AgregarTrabajadorSucursal extends HttpServlet {
             dto.getSucursal().setIdSucursal(idSucursal);
             try{
                 TrabajadorDAO dao = new TrabajadorDAO();
-                dao.emplearSucursal(dto);
+                dao.update(dto);
+                response.sendRedirect("trabajadores.jsp");
             }catch(Exception e){
                 e.printStackTrace();
             }

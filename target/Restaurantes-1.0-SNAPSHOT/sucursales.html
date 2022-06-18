@@ -186,87 +186,120 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid" style="display: flex; flex-direction: column; align-items: center; max-width: 60vw;">
-                    <!-- Content Row -->
-                    <div style="background:white; border-radius: 10px; padding: 10px; box-shadow: 3px 3px 5px 5px lightgray"> 
-                    <form style="padding: 20px">
-                            <div class="mb-3">
-                                <label for="formGroupExampleInput" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre de la Sucursal" required>
-                                <label for="formGroupExampleInput" class="form-label" style="margin-top:20px">Dirección</label>
-                                <div class="row">
-                                    <div class="col">
-                                        <input type="text" id="calle" name="calle" class="form-control" placeholder="Calle" aria-label="calle" required>
-                                    </div>
-                                    <div class="col">
-                                        <input type="text" id="colonia" name="colonia" class="form-control" placeholder="Colonia" aria-label="colonia" required>
-                                    </div>
-                                    <div class="col">
-                                        <input type="text" id="numext" name="numext" class="form-control" placeholder="No. Ext" aria-label="No. Ext" required>
-                                    </div>
-                                    <div class="col">
-                                        <input type="text" id="numint" name="numint" class="form-control" placeholder="No. Interior" aria-label="No. Interior">
-                                    </div>
-                                </div>
-                                <div class="row" style="margin-top: 20px;">
-                                    <div class="col">
-                                        <select id="estado" name="estado" class="custom-select custom-select-sm form-control form-control-sm" aria-label="Default select example">
-                                            <option selected>Selecciona tu estado</option>
-                                            <% HashMap<Integer,String> estados = Catalogos%>
-                                            <option value="Aguascalientes">Aguascalientes</option>
-                                          </select>
-                                    </div>
-                                    <div class="col">
-                                        <select id="municipio" name="municipio" class="custom-select custom-select-sm form-control form-control-sm" aria-label="Default select example">
-                                                <option id='AGUASCALIENTES'>AGUASCALIENTES</option>
-                                          </select>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col" style="margin-top: 20px;">
-                                        <input type="text" id="telefono" name="telefono" class="form-control" placeholder="Telefono" aria-label="Telefono" required>
-                                    </div>
-                                </div>
-                                <div class="button__submit" style="display: flex; justify-content: center;">
-                                    <button type="submit" class="btn btn-primary" style="margin-top: 20px; width: 150px;">Agregar</button>
-                                </div>
-
-                            </div>
-
-                        </form>
+                    <div style="background:white; border-radius: 10px; padding: 10px; box-shadow: 3px 3px 5px 5px lightgray">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Agregar Sucursal</h6>
                         </div>
-                        <table class="table" style="margin-top: 40px;">
-                            <thead>
-                              <tr>
-                                <th scope="col">Sucursal</th>
-                                <th scope="col">Gerente</th>
-                                <th scope="col">Accion</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td>Nombre</td>
-                                <td>Nombre</td>
-                                <td>🗹</td>
-                                <td>☒</td>
-                              </tr>
-                              <tr>
-                                <td>Politecnico</td>
-                                <td>Oscar Bucio</td>
-                                <td>🗹</td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <td>Sergio Pérez</td>
-                                <td>Buenavista</td>
-                                <td></td>
-                                <td>☒</td>
-                              </tr>
-                            </tbody>
-                          </table>
-
+                        <div class="card-body">
+                            <form style="padding: 20px">
+                                <div class="mb-3">
+                                    <label for="formGroupExampleInput" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre de la Sucursal" required>
+                                    <label for="formGroupExampleInput" class="form-label" style="margin-top:20px">Dirección</label>
+                                    <div class="row">
+                                        <div class="col">
+                                            <input type="text" id="calle" name="calle" class="form-control" placeholder="Calle" aria-label="calle" required>
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" id="colonia" name="colonia" class="form-control" placeholder="Colonia" aria-label="colonia" required>
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" id="numext" name="numext" class="form-control" placeholder="No. Ext" aria-label="No. Ext" required>
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" id="numint" name="numint" class="form-control" placeholder="No. Interior" aria-label="No. Interior">
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 20px;">
+                                        <div class="col">
+                                            <select id="estado" name="estado" class="custom-select custom-select-sm form-control form-control-sm" aria-label="Default select example">
+                                                <option selected>Selecciona tu estado</option>
+                                                <% HashMap<Integer,String> estados = Catalogos%>
+                                                <option value="Aguascalientes">Aguascalientes</option>
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            <select id="municipio" name="municipio" class="custom-select custom-select-sm form-control form-control-sm" aria-label="Default select example">
+                                                    <option id='AGUASCALIENTES'>AGUASCALIENTES</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col" style="margin-top: 20px;">
+                                            <input type="text" id="telefono" name="telefono" class="form-control" placeholder="Telefono" aria-label="Telefono" required>
+                                        </div>
+                                    </div>
+                                    <div class="button__submit" style="display: flex; justify-content: center;">
+                                        <button type="submit" class="btn btn-primary" style="margin-top: 20px; width: 150px;">Agregar</button>
+                                    </div>
+    
+                                </div>
+    
+                            </form>
+                        </div>
+                    </div>
+                    <br/>
+                    <div style="background:white; border-radius: 10px; padding: 10px; box-shadow: 3px 3px 5px 5px lightgray; width: 100%;">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Lista Sucurlsales</h6>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr style="background-color: #4e73df;">
+                                        <th scope="col"><font color="white">Sucursal</font></th>
+                                        <th scope="col"><font color="white">Gerente</font></th>
+                                        <th scope="col"><font color="white">Accion</font></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Politecnico</td>
+                                        <td>Oscar Bucio</td>
+                                        <td align="center">
+                                            <a class="btn btn-warning ">Editar</a>
+                                            <a class="btn btn-danger ">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Politecnico</td>
+                                        <td>Oscar Bucio</td>
+                                        <td align="center">
+                                            <a class="btn btn-warning ">Editar</a>
+                                            <a class="btn btn-danger ">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Politecnico</td>
+                                        <td>Oscar Bucio</td>
+                                        <td align="center">
+                                            <a class="btn btn-warning ">Editar</a>
+                                            <a class="btn btn-danger ">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Politecnico</td>
+                                        <td>Oscar Bucio</td>
+                                        <td align="center">
+                                            <a class="btn btn-warning ">Editar</a>
+                                            <a class="btn btn-danger ">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Politecnico</td>
+                                        <td>Oscar Bucio</td>
+                                        <td align="center">
+                                            <a class="btn btn-warning ">Editar</a>
+                                            <a class="btn btn-danger ">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.container-fluid -->
-
+                <br/>
             </div>
             <!-- End of Main Content -->
 
