@@ -15,7 +15,7 @@ public class RestauranteDAO extends Connector implements DAO<RestauranteDTO>{
     public static final String SQL_READ_BY_OWNER = "SELECT * FROM RESTAURANTE WHERE iddueno=?";
     public static final String SQL_READ = "SELECT * FROM RESTAURANTE WHERE idrestaurante=?";
     public static final String SQL_INSERT = "INSERT INTO RESTAURANTE(nombreRestaurante,logo,idDueno) VALUES (?,?,?)";
-    public static final String SQL_UPDATE = "UPDATE RESTAURANTE SET nombreRestaurante=? WHERE idDueno=? AND idRestaurante=?";
+    public static final String SQL_UPDATE = "UPDATE RESTAURANTE SET nombreRestaurante=? WHERE iddueno=? AND idrestaurante=?";
     
     @Override
     public RestauranteDTO get(RestauranteDTO dto) throws SQLException {
@@ -71,6 +71,7 @@ public class RestauranteDAO extends Connector implements DAO<RestauranteDTO>{
     @Override
     public void update(RestauranteDTO dto) throws SQLException {
         try (Connection connection = getConnection(); PreparedStatement ps = connection.prepareStatement(SQL_UPDATE)){
+            System.out.println(dto);
             ps.setString(1, dto.getRestaurante().getNombreRestaurante());
             ps.setInt(2, dto.getDueno().getIdTrabajador());
             ps.setInt(3, dto.getRestaurante().getIdRestaurante());

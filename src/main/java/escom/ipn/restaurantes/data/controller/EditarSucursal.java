@@ -1,9 +1,8 @@
 package escom.ipn.restaurantes.data.controller;
 
-
-import escom.ipn.restaurantes.data.dao.RestauranteDAO;
+import escom.ipn.restaurantes.data.dao.SucursalDAO;
 import escom.ipn.restaurantes.data.dto.RestauranteDTO;
-import escom.ipn.restaurantes.data.dto.TrabajadorDTO;
+import escom.ipn.restaurantes.data.dto.SucursalDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,8 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "ActualizarRestaurante" ,urlPatterns = {"/ActualizarRestaurante"})
-public class ActualizarRestaurante extends HttpServlet {
+/**
+ *
+ * @author alanm
+ */
+@WebServlet(name = "EditarSucursal", urlPatterns = {"/EditarSucursal"})
+public class EditarSucursal extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,23 +32,35 @@ public class ActualizarRestaurante extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
             String nombre = request.getParameter("nombre");
+            String calle = request.getParameter("calle");
+            String colonia = request.getParameter("colonia");
+            int noExt = Integer.parseInt(request.getParameter("numext"));
+            int noInt = Integer.parseInt(request.getParameter("numint"));;
+            int idMunicipio = Integer.parseInt(request.getParameter("municipio"));
+            int idEstado = Integer.parseInt(request.getParameter("estado"));
+            String telefono = request.getParameter("telefono");
+            SucursalDTO dto = new SucursalDTO();
+            dto.getSucursal().setNombreSucursal(nombre);
+            dto.getSucursal().setCalle(calle);
+            dto.getSucursal().setColonia(colonia);
+            dto.getSucursal().setNumeroExterior(noExt);
+            dto.getSucursal().setNumeroInterior(noInt);
+            dto.getMunicipio().setIdMunicipio(idMunicipio);
+            dto.getEstado().setIdEstado(idEstado);
+            dto.getSucursal().setTelefono(telefono);
             
-            RestauranteDTO dto = new RestauranteDTO();
-            dto.getRestaurante().setNombreRestaurante(nombre);
-            dto.getDueno().setIdTrabajador(0);
             HttpSession sesionOk = request.getSession();
-            TrabajadorDTO tdto = (TrabajadorDTO) sesionOk.getAttribute("user");
-            dto.getDueno().setIdTrabajador(tdto.getTrabajador().getIdTrabajador());
             RestauranteDTO rdto = (RestauranteDTO) sesionOk.getAttribute("restaurante");
             dto.getRestaurante().setIdRestaurante(rdto.getRestaurante().getIdRestaurante());
             try{
-                RestauranteDAO dao = new RestauranteDAO();
+                SucursalDAO dao = new SucursalDAO();
                 dao.update(dto);
-                sesionOk.setAttribute("restaurante", rdto);
-                response.sendRedirect("datos.html");
+                response.sendRedirect("sucursales.jsp");
+                
             }catch(Exception e){
-                e.printStackTrace();
+                out.print(e.getMessage());
             }
         }
     }

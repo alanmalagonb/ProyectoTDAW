@@ -15,10 +15,10 @@ import java.util.List;
 public class SucursalDAO extends Connector implements DAO<SucursalDTO>{
     
     private static final String SQL_INSERT="INSERT INTO sucursal (nombresucursal, telefono, calle, colonia, numeroexterior, numerointerior, idmunicipio, idestado, idrestaurante) VALUES (?,?,?,?,?,?,?,?,?)";
-    private static final String SQL_READ_ALL="SELECT * FROM SUCURSAL";
-    private static final String SQL_READ_ALL_BY_ID="SELECT * FROM SUCURSAL where idrestaurante=?";
-    private static final String SQL_READ="SELECT * FROM SUCURSAL where idsucursal=?";
-    private static final String SQL_DELETE="DELETE FROM SUCURSAL WHERE idSucursal=?";
+    private static final String SQL_READ_ALL="SELECT * FROM SUCURSAL  INNER JOIN ESTADO on sucursal.idestado = estado.idestado inner join municipio on sucursal.idmunicipio = municipio.idmunicipio";
+    private static final String SQL_READ_ALL_BY_ID="SELECT * FROM SUCURSAL INNER JOIN ESTADO on sucursal.idestado = estado.idestado inner join municipio on sucursal.idmunicipio = municipio.idmunicipio where idrestaurante=?";
+    private static final String SQL_READ="SELECT * FROM sucursal INNER JOIN ESTADO on sucursal.idestado = estado.idestado inner join municipio on sucursal.idmunicipio = municipio.idmunicipio where idsucursal=?";
+    private static final String SQL_DELETE="DELETE FROM SUCURSAL  INNER JOIN ESTADO on sucursal.idestado = estado.idestado inner join municipio on sucursal.idmunicipio = municipio.idmunicipio WHERE idSucursal=?";
     private static final String SQL_UPDATE="UPDATE FROM SUCURSAL SET =?,=?,=?,=?,=?,=? WHERE idSucursal=?";
     private static final String SQL_COUNT_ALL="SELECT COUNT(idsucursal) WHERE idrestaurante=?";
     
@@ -113,6 +113,15 @@ public class SucursalDAO extends Connector implements DAO<SucursalDTO>{
             SucursalDTO dto = new SucursalDTO();
                 dto.getSucursal().setIdSucursal(rs.getInt("idsucursal"));
                 dto.getSucursal().setNombreSucursal(rs.getString("nombresucursal"));
+                dto.getSucursal().setCalle(rs.getString("calle"));
+                dto.getSucursal().setColonia(rs.getString("colonia"));
+                dto.getSucursal().setNumeroExterior(rs.getInt("numeroexterior"));
+                dto.getSucursal().setNumeroInterior(rs.getInt("numerointerior"));
+                dto.getSucursal().setTelefono(rs.getString("telefono"));
+                dto.getEstado().setIdEstado(rs.getInt("idestado"));
+                dto.getEstado().setNombreEstado(rs.getString("nombreestado"));
+                dto.getMunicipio().setIdMunicipio(rs.getInt("idmunicipio"));
+                dto.getMunicipio().setNombreMunicipio(rs.getString("nombremunicipio"));
             resultado.add(dto);
         }
         return resultado;}

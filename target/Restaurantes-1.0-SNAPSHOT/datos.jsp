@@ -1,3 +1,11 @@
+<%-- 
+    Document   : datos
+    Created on : 18 jun. 2022, 14:40:29
+    Author     : alanm
+--%>
+
+<%@page import="escom.ipn.restaurantes.data.dto.RestauranteDTO"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -213,7 +221,13 @@
                     <!-- Content Row -->
                     <div class="row">
                         <form method="POST" action="ActualizarRestaurante">
-                            <input type="text" id="nombre" name="nombre" value="nombre"/>
+                            <%
+                                HttpSession sesion = request.getSession();
+                                RestauranteDTO rdto = new RestauranteDTO();
+                                
+                                    rdto = (RestauranteDTO) sesion.getAttribute("restaurante");
+                            %>
+                            <input type="text" id="nombre" name="nombre" value="<%= rdto.getRestaurante().getNombreRestaurante() %>"/>
                             <input type="submit" value="Actualizar"/>
                         </form>
                         

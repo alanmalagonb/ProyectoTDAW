@@ -1,9 +1,5 @@
 package escom.ipn.restaurantes.data.controller;
 
-
-import escom.ipn.restaurantes.data.dao.RestauranteDAO;
-import escom.ipn.restaurantes.data.dto.RestauranteDTO;
-import escom.ipn.restaurantes.data.dto.TrabajadorDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -11,10 +7,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "ActualizarRestaurante" ,urlPatterns = {"/ActualizarRestaurante"})
-public class ActualizarRestaurante extends HttpServlet {
+/**
+ *
+ * @author alanm
+ */
+@WebServlet(name = "EliminarSucursal", urlPatterns = {"/EliminarSucursal"})
+public class EliminarSucursal extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,24 +28,16 @@ public class ActualizarRestaurante extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            String nombre = request.getParameter("nombre");
-            
-            RestauranteDTO dto = new RestauranteDTO();
-            dto.getRestaurante().setNombreRestaurante(nombre);
-            dto.getDueno().setIdTrabajador(0);
-            HttpSession sesionOk = request.getSession();
-            TrabajadorDTO tdto = (TrabajadorDTO) sesionOk.getAttribute("user");
-            dto.getDueno().setIdTrabajador(tdto.getTrabajador().getIdTrabajador());
-            RestauranteDTO rdto = (RestauranteDTO) sesionOk.getAttribute("restaurante");
-            dto.getRestaurante().setIdRestaurante(rdto.getRestaurante().getIdRestaurante());
-            try{
-                RestauranteDAO dao = new RestauranteDAO();
-                dao.update(dto);
-                sesionOk.setAttribute("restaurante", rdto);
-                response.sendRedirect("datos.html");
-            }catch(Exception e){
-                e.printStackTrace();
-            }
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet EliminarSucursal</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet EliminarSucursal at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

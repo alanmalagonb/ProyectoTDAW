@@ -1,3 +1,20 @@
+<%-- 
+    Document   : sucursales
+    Created on : 13 jun. 2022, 23:06:39
+    Author     : alanm
+--%>
+
+<%@page import="escom.ipn.restaurantes.data.dto.TrabajadorDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.List"%>
+<%@page import="escom.ipn.restaurantes.data.dto.SucursalDTO"%>
+<%@page import="escom.ipn.restaurantes.data.dto.RestauranteDTO"%>
+<%@page import="escom.ipn.restaurantes.data.dao.SucursalDAO"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.lang.Integer"%>
+<%@page import="utils.Catalogos"%>
+<%@page import="java.util.HashMap"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,7 +75,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="./datos.html" data-toggle="collapse" data-target="#collapseTwo"
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fa-solid fa-database"></i>
                     <span>Datos</span>
@@ -66,7 +83,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones</h6>
-                        <a class="collapse-item" href="#">Datos</a>
+                        <a class="collapse-item" href="datos.html">Datos</a>
                     </div>
                 </div>
             </li>
@@ -82,7 +99,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones</h6>
-                        <a class="collapse-item" href="#">Sucursales</a>
+                        <a class="collapse-item" href="sucursales.html">Sucursales</a>
                     </div>
                 </div>
             </li>
@@ -96,27 +113,27 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones</h6>
-                        <a class="collapse-item" href="#">Inventario</a>
+                        <a class="collapse-item" href="inventario.html">Inventario</a>
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="receta.html">
                     <i class="fa-solid fa-file-waveform"></i>
                     <span>Receta</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="menu.html">
                     <i class="fa-solid fa-burger"></i>
                     <span>Menu</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="trabajadores.html">
                     <i class="fa-solid fa-users-line"></i>
                     <span>Trabajadores</span></a>
             </li>
@@ -147,30 +164,6 @@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
@@ -209,16 +202,92 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <div class="container-fluid" style="display: flex; flex-direction: column; align-items: center; max-width: 60vw;">
                     <!-- Content Row -->
-                    <div class="row">
-                        <form method="POST" action="ActualizarRestaurante">
-                            <input type="text" id="nombre" name="nombre" value="nombre"/>
-                            <input type="submit" value="Actualizar"/>
+                    <div style="background:white; border-radius: 10px; padding: 10px; box-shadow: 3px 3px 5px 5px lightgray"> 
+                        <form style="padding: 20px" method="POST" action="AgregarSucursal">
+                            <div class="mb-3">
+                                  <% 
+                                    SucursalDAO dao = new SucursalDAO();
+                                    HttpSession sesion = request.getSession();
+                                    TrabajadorDTO dto = (TrabajadorDTO)sesion.getAttribute("user");
+                                    RestauranteDTO rdto = new RestauranteDTO();
+                                    rdto = (RestauranteDTO) sesion.getAttribute("restaurante");
+                                    int id = Integer.parseInt(request.getParameter("id"));
+                                    SucursalDTO sdto = new SucursalDTO();
+                                    sdto.getSucursal().setIdSucursal(id);
+                                    sdto = dao.get(sdto);
+                                %>
+                                <label for="formGroupExampleInput" class="form-label">Nombre</label>
+                                <input type="text" value="<%= sdto.getSucursal().getNombreSucursal() %>" class="form-control" id="nombre" name="nombre" placeholder="Nombre de la Sucursal" required>
+                                <label for="formGroupExampleInput" class="form-label" style="margin-top:20px">Dirección</label>
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="text" value="<%= sdto.getSucursal().getCalle() %>" id="calle" name="calle" class="form-control" placeholder="Calle" aria-label="calle" required>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" value="<%= sdto.getSucursal().getColonia() %>" id="colonia" name="colonia" class="form-control" placeholder="Colonia" aria-label="colonia" required>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" value="<%= sdto.getSucursal().getNumeroExterior() %>" id="numext" name="numext" class="form-control" placeholder="No. Ext" aria-label="No. Ext" required>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" value="<%= sdto.getSucursal().getNumeroInterior() %>" id="numint" name="numint" class="form-control" placeholder="No. Interior" aria-label="No. Interior">
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top: 20px;">
+                                    <div class="col">
+                                        <select id="estado" name="estado" class="custom-select custom-select-sm form-control form-control-sm" aria-label="Default select example">
+                                            < <!-- <option selected>Selecciona tu estado</option> -->
+                                            <option value="<%= sdto.getEstado().getIdEstado() %>"><%= sdto.getEstado().getNombreEstado() %></option>
+                                           <% 
+                                                HashMap<Integer,String> estados = new HashMap<>();
+                                                estados.remove(sdto.getEstado().getIdEstado());
+                                                for(Map.Entry<Integer, String> entry: estados.entrySet()){
+                                                    int key = entry.getKey();
+                                                    String value = entry.getValue();
+                                                
+                                               
+                                               
+                                            %>
+                                            <option value="<%=key%>"><%=value%></option>
+                                            <%
+                                                }
+                                            %>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <select id="municipio" name="municipio" class="custom-select custom-select-sm form-control form-control-sm" aria-label="Default select example">
+                                            <option value="<%= sdto.getMunicipio().getIdMunicipio() %>"><%= sdto.getMunicipio().getNombreMunicipio() %></option>
+                                            <% 
+                                                 HashMap<Integer,String> municipios = new HashMap<>();
+                                                 municipios.remove(sdto.getMunicipio().getIdMunicipio());
+                                                for(Map.Entry<Integer, String> entry: municipios.entrySet()){
+                                                    int key = entry.getKey();
+                                                    String value = entry.getValue();
+                                            %>
+                                            <option value="<%=key%>"><%=value%></option>
+                                            <%
+                                                }
+                                            %>
+                                          </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col" style="margin-top: 20px;">
+                                        <input type="text" id="telefono" name="telefono" class="form-control" placeholder="Telefono" aria-label="Telefono" required>
+                                    </div>
+                                </div>
+                                <div class="button__submit" style="display: flex; justify-content: center;">
+                                    <button type="submit" class="btn btn-primary" style="margin-top: 20px; width: 150px;">Agregar</button>
+                                </div>
+
+                            </div>
+
                         </form>
-                        
-                        
-                    </div>
+                        </div>
+
+                </div>
                 <!-- /.container-fluid -->
 
             </div>
