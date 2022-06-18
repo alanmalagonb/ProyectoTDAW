@@ -2,9 +2,11 @@ C:\Users\alanm\Documents\GitHub\ProyectoTDAW\src\main\java\escom\ipn\restaurante
 C:\Users\alanm\Documents\GitHub\ProyectoTDAW\src\main\java\escom\ipn\restaurantes\storage\Connector.java
 C:\Users\alanm\Documents\GitHub\ProyectoTDAW\src\main\java\escom\ipn\restaurantes\data\pojo\Trabajador.java
 C:\Users\alanm\Documents\GitHub\ProyectoTDAW\src\main\java\escom\ipn\restaurantes\data\controller\IniciarSesion.java
+C:\Users\alanm\Documents\GitHub\ProyectoTDAW\src\main\java\escom\ipn\restaurantes\data\controller\EliminarSucursal.java
 C:\Users\alanm\Documents\GitHub\ProyectoTDAW\src\main\java\escom\ipn\restaurantes\data\pojo\TrabajadorSucursal.java
 C:\Users\alanm\Documents\GitHub\ProyectoTDAW\src\main\java\escom\ipn\restaurantes\storage\DataSource.java
 C:\Users\alanm\Documents\GitHub\ProyectoTDAW\src\main\java\escom\ipn\restaurantes\data\pojo\Ingrediente.java
+C:\Users\alanm\Documents\GitHub\ProyectoTDAW\src\main\java\escom\ipn\restaurantes\data\controller\EditarSucursal.java
 C:\Users\alanm\Documents\GitHub\ProyectoTDAW\src\main\java\escom\ipn\restaurantes\data\pojo\HorarioSucursal.java
 C:\Users\alanm\Documents\GitHub\ProyectoTDAW\src\main\java\escom\ipn\restaurantes\data\dto\PlatilloDTO.java
 C:\Users\alanm\Documents\GitHub\ProyectoTDAW\src\main\java\escom\ipn\restaurantes\data\pojo\Medida.java
