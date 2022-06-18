@@ -31,7 +31,6 @@ escom\ipn\restaurantes\data\dto\DiaSemanaDTO.class
 escom\ipn\restaurantes\data\controller\RegistrarTrabajador.class
 escom\ipn\restaurantes\data\pojo\Restaurante.class
 escom\ipn\restaurantes\data\controller\IniciarSesion.class
-escom\ipn\restaurantes\data\dao\TestDAO.class
 escom\ipn\restaurantes\storage\MySQLSource.class
 escom\ipn\restaurantes\data\pojo\Trabajador.class
 escom\ipn\restaurantes\data\dto\SucursalDTO.class
