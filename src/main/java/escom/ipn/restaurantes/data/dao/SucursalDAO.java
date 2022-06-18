@@ -18,8 +18,8 @@ public class SucursalDAO extends Connector implements DAO<SucursalDTO>{
     private static final String SQL_READ_ALL="SELECT * FROM SUCURSAL  INNER JOIN ESTADO on sucursal.idestado = estado.idestado inner join municipio on sucursal.idmunicipio = municipio.idmunicipio";
     private static final String SQL_READ_ALL_BY_ID="SELECT * FROM SUCURSAL INNER JOIN ESTADO on sucursal.idestado = estado.idestado inner join municipio on sucursal.idmunicipio = municipio.idmunicipio where idrestaurante=?";
     private static final String SQL_READ="SELECT * FROM sucursal INNER JOIN ESTADO on sucursal.idestado = estado.idestado inner join municipio on sucursal.idmunicipio = municipio.idmunicipio where idsucursal=?";
-    private static final String SQL_DELETE="DELETE FROM SUCURSAL  INNER JOIN ESTADO on sucursal.idestado = estado.idestado inner join municipio on sucursal.idmunicipio = municipio.idmunicipio WHERE idSucursal=?";
-    private static final String SQL_UPDATE="UPDATE FROM SUCURSAL SET =?,=?,=?,=?,=?,=? WHERE idSucursal=?";
+    private static final String SQL_DELETE="DELETE FROM SUCURSAL WHERE idSucursal=?";
+    private static final String SQL_UPDATE="UPDATE SUCURSAL SET nombresucursal=?,numeroexterior=?,numerointerior=?,telefono=?,calle=?,colonia=?,idestado=?,idmunicipio=? WHERE idSucursal=?";
     private static final String SQL_COUNT_ALL="SELECT COUNT(idsucursal) WHERE idrestaurante=?";
     
     @Override

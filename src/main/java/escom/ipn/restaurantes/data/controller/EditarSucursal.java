@@ -50,10 +50,9 @@ public class EditarSucursal extends HttpServlet {
             dto.getMunicipio().setIdMunicipio(idMunicipio);
             dto.getEstado().setIdEstado(idEstado);
             dto.getSucursal().setTelefono(telefono);
+            int idSucursal = Integer.parseInt(request.getParameter("idSucursal"));
+            dto.getSucursal().setIdSucursal(idSucursal);
             
-            HttpSession sesionOk = request.getSession();
-            RestauranteDTO rdto = (RestauranteDTO) sesionOk.getAttribute("restaurante");
-            dto.getRestaurante().setIdRestaurante(rdto.getRestaurante().getIdRestaurante());
             try{
                 SucursalDAO dao = new SucursalDAO();
                 dao.update(dto);

@@ -276,7 +276,7 @@
                             <thead>
                               <tr>
                                 <th scope="col">Sucursal</th>
-                                <th scope="col" colspan="2">Accion</th>
+                                <th colspan="2">Accion</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -294,8 +294,16 @@
                                 %>
                                 <tr>
                                     <td><%= s.getSucursal().getNombreSucursal() %></td>
-                                    <td>🗹</td>
-                                    <td>☒</td>
+                                    <td>
+                                        <a class="btn btn-warning" href="editarSucursal.jsp?id=<%= s.getSucursal().getIdSucursal() %>">
+                                            Editar
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-danger" href="EliminarSucursal?id=<%= s.getSucursal().getIdSucursal() %>">
+                                            Eliminar
+                                        </a>
+                                    </td>
                                 </tr>
                                     <%}%>
                               

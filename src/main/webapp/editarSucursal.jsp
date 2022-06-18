@@ -205,7 +205,7 @@
                 <div class="container-fluid" style="display: flex; flex-direction: column; align-items: center; max-width: 60vw;">
                     <!-- Content Row -->
                     <div style="background:white; border-radius: 10px; padding: 10px; box-shadow: 3px 3px 5px 5px lightgray"> 
-                        <form style="padding: 20px" method="POST" action="AgregarSucursal">
+                        <form style="padding: 20px" method="POST" action="EditarSucursal">
                             <div class="mb-3">
                                   <% 
                                     SucursalDAO dao = new SucursalDAO();
@@ -218,6 +218,8 @@
                                     sdto.getSucursal().setIdSucursal(id);
                                     sdto = dao.get(sdto);
                                 %>
+                                
+                                <input type="hidden" name="idSucursal" id="idSucursal" value="<%=id%>">
                                 <label for="formGroupExampleInput" class="form-label">Nombre</label>
                                 <input type="text" value="<%= sdto.getSucursal().getNombreSucursal() %>" class="form-control" id="nombre" name="nombre" placeholder="Nombre de la Sucursal" required>
                                 <label for="formGroupExampleInput" class="form-label" style="margin-top:20px">Dirección</label>
@@ -275,7 +277,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col" style="margin-top: 20px;">
-                                        <input type="text" id="telefono" name="telefono" class="form-control" placeholder="Telefono" aria-label="Telefono" required>
+                                        <input type="text" value="<%= sdto.getSucursal().getTelefono() %>" id="telefono" name="telefono" class="form-control" placeholder="Telefono" aria-label="Telefono" required>
                                     </div>
                                 </div>
                                 <div class="button__submit" style="display: flex; justify-content: center;">
