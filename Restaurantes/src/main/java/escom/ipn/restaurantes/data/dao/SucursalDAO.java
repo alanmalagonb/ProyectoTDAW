@@ -16,9 +16,11 @@ public class SucursalDAO extends Connector implements DAO<SucursalDTO>{
     
     private static final String SQL_INSERT="INSERT INTO sucursal (nombresucursal, telefono, calle, colonia, numeroexterior, numerointerior, idmunicipio, idestado, idrestaurante) VALUES (?,?,?,?,?,?,?,?,?)";
     private static final String SQL_READ_ALL="SELECT * FROM SUCURSAL";
+    private static final String SQL_READ_ALL_BY_ID="SELECT * FROM SUCURSAL where idrestaurante=?";
     private static final String SQL_READ="SELECT * FROM SUCURSAL where idsucursal=?";
     private static final String SQL_DELETE="DELETE FROM SUCURSAL WHERE idSucursal=?";
     private static final String SQL_UPDATE="UPDATE FROM SUCURSAL SET =?,=?,=?,=?,=?,=? WHERE idSucursal=?";
+    private static final String SQL_COUNT_ALL="SELECT COUNT(idsucursal) WHERE idrestaurante=?";
     
     @Override
     public SucursalDTO get(SucursalDTO dto) throws SQLException {
@@ -44,6 +46,20 @@ public class SucursalDAO extends Connector implements DAO<SucursalDTO>{
         }
         return sucursales;
     }
+    
+    public List<SucursalDTO> getAllByIdRestaurante(RestauranteDTO dto) throws SQLException {
+        List<SucursalDTO> sucursales = new ArrayList<>();
+        try(Connection connection = getConnection(); PreparedStatement ps = connection.prepareStatement(SQL_READ_ALL_BY_ID)){
+            ps.setInt(1, dto.getRestaurante().getIdRestaurante());
+            
+                try (ResultSet rs = ps.executeQuery()){
+                    List<SucursalDTO> results = getResults(rs);   
+                    sucursales = results;
+                }
+            
+        }
+        return sucursales;
+    }
 
     @Override
     public SucursalDTO save(SucursalDTO dto) throws SQLException {
@@ -60,12 +76,7 @@ public class SucursalDAO extends Connector implements DAO<SucursalDTO>{
             ps.setInt(9, dto.getRestaurante().getIdRestaurante());
             int executed = ps.executeUpdate();            
             if(executed > 0) {
-                try (ResultSet rs = ps.getResultSet()){
-                    List<SucursalDTO> results = getResults(rs);   
-                    if(!results.isEmpty()){
-                        sucursal = results.get(0);
-                    }
-                }
+                return sucursal;
             }
         } 
         return sucursal;

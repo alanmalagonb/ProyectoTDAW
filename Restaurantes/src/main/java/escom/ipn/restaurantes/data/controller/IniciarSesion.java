@@ -47,11 +47,12 @@ public class IniciarSesion extends HttpServlet {
                     HttpSession session = request.getSession(true);
                     session.setAttribute("user", dto);
                     if(dto.getRol().getIdRol() == 1){
-                        response.sendRedirect("dueno.html");
+                        
                         RestauranteDAO rdao = new RestauranteDAO();
                         RestauranteDTO rdto;
                         rdto = rdao.getByOwner(dto);
-                        session.setAttribute("restaurante", rdto.getRestaurante());
+                        session.setAttribute("restaurante", rdto);
+                        response.sendRedirect("dueno.html");
                     }else{
                         response.sendRedirect("trabajador.html");
                     

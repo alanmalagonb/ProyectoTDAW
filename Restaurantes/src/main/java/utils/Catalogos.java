@@ -19,8 +19,10 @@ import java.util.logging.Logger;
  */
 public class Catalogos {
     private static HashMap<Integer,String> estados = new HashMap<>();
+    private static HashMap<Integer,String> municipios = new HashMap<>();
     
     private static final String SQL_READ_ESTADOS = "SELECT * FROM ESTADO";
+    private static final String SQL_READ_MUNICIPIOS = "SELECT * FROM municipio";
     
     public static Connection getConnection(){
         PostgreSQLSource connectionp = new PostgreSQLSource("restaurantes","localhost","5432","postgres","n0m3l0");
@@ -35,11 +37,23 @@ public class Catalogos {
         } catch (SQLException ex) {
             Logger.getLogger(Catalogos.class.getName()).log(Level.SEVERE, null, ex);
         }
+        try(Connection connection = getConnection(); Statement s = connection.createStatement();
+            ResultSet rs = s.executeQuery(SQL_READ_MUNICIPIOS)){
+            while (rs.next()) 
+                municipios.put(rs.getInt("idmunicipio"), rs.getString("nombremunicipio"));
+        } catch (SQLException ex) {
+            Logger.getLogger(Catalogos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+
+    public static HashMap<Integer, String> getEstados() {
+        return estados;
+    }
+
+    public static HashMap<Integer, String> getMunicipios() {
+        return municipios;
     }
     
-    public static void main(String[] args) {
-        estados.forEach((key,value) -> {
-            System.out.println(value);
-        });
-    }
+    
 }

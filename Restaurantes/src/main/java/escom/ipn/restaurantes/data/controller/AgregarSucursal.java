@@ -1,6 +1,7 @@
 package escom.ipn.restaurantes.data.controller;
 
 import escom.ipn.restaurantes.data.dao.SucursalDAO;
+import escom.ipn.restaurantes.data.dto.RestauranteDTO;
 import escom.ipn.restaurantes.data.dto.SucursalDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,10 +36,11 @@ public class AgregarSucursal extends HttpServlet {
             String nombre = request.getParameter("nombre");
             String calle = request.getParameter("calle");
             String colonia = request.getParameter("colonia");
-            int noExt = Integer.parseInt(request.getParameter("exterior"));
-            int noInt = Integer.parseInt(request.getParameter("interior"));;
+            int noExt = Integer.parseInt(request.getParameter("numext"));
+            int noInt = Integer.parseInt(request.getParameter("numint"));;
             int idMunicipio = Integer.parseInt(request.getParameter("municipio"));
             int idEstado = Integer.parseInt(request.getParameter("estado"));
+            String telefono = request.getParameter("telefono");
             SucursalDTO dto = new SucursalDTO();
             dto.getSucursal().setNombreSucursal(nombre);
             dto.getSucursal().setCalle(calle);
@@ -46,11 +49,18 @@ public class AgregarSucursal extends HttpServlet {
             dto.getSucursal().setNumeroInterior(noInt);
             dto.getMunicipio().setIdMunicipio(idMunicipio);
             dto.getEstado().setIdEstado(idEstado);
+            dto.getSucursal().setTelefono(telefono);
+            
+            HttpSession sesionOk = request.getSession();
+            RestauranteDTO rdto = (RestauranteDTO) sesionOk.getAttribute("restaurante");
+            dto.getRestaurante().setIdRestaurante(rdto.getRestaurante().getIdRestaurante());
             try{
                 SucursalDAO dao = new SucursalDAO();
-                dao.save(dto);
+                SucursalDTO n =dao.save(dto);
+                response.sendRedirect("sucursales.jsp");
+                
             }catch(Exception e){
-                e.printStackTrace();
+                out.print(e.getMessage());
             }
         }
     }
