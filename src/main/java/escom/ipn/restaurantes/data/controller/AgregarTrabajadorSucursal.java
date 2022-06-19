@@ -39,10 +39,10 @@ public class AgregarTrabajadorSucursal extends HttpServlet {
             dto.getSucursal().setIdSucursal(idSucursal);
             try{
                 TrabajadorDAO dao = new TrabajadorDAO();
-                dao.update(dto);
+                dao.emplearSucursal(dto);
                 response.sendRedirect("trabajadores.jsp");
             }catch(Exception e){
-                e.printStackTrace();
+                out.println(e);
             }
         }
     }
