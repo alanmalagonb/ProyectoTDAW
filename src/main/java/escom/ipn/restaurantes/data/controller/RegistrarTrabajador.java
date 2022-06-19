@@ -35,7 +35,7 @@ public class RegistrarTrabajador extends HttpServlet {
             dto.getTrabajador().setApellidoPaterno(apellidoPaterno);
             dto.getTrabajador().setEmail(email);
             dto.getTrabajador().setPassword(password);
-            dto.getRol().setIdRol(1);
+            dto.getRol().setIdRol(2);
             if(dueno != null)
                 dto.getRol().setIdRol(1);
             else
@@ -43,12 +43,16 @@ public class RegistrarTrabajador extends HttpServlet {
             
             try{
                TrabajadorDAO dao = new TrabajadorDAO();
-               dto = dao.register(dto);
+               out.println(dto);
+               dao.register(dto);
+               
+               
                if(dueno!=null) {
                    RestauranteDTO rdto = new RestauranteDTO();
-                   rdto.getDueno().setIdTrabajador(dto.getTrabajador().getIdTrabajador());
+                   rdto.getDueno().setEmail(email);
                    rdto.getRestaurante().setLogo("");
                    rdto.getRestaurante().setNombreRestaurante(nombreRestaurante);
+                  
                    RestauranteDAO rdao = new RestauranteDAO();
                    rdto = rdao.save(rdto);
                }

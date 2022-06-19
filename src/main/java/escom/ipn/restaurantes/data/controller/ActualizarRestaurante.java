@@ -33,17 +33,19 @@ public class ActualizarRestaurante extends HttpServlet {
             
             RestauranteDTO dto = new RestauranteDTO();
             dto.getRestaurante().setNombreRestaurante(nombre);
-            dto.getDueno().setIdTrabajador(0);
+            
             HttpSession sesionOk = request.getSession();
             TrabajadorDTO tdto = (TrabajadorDTO) sesionOk.getAttribute("user");
             dto.getDueno().setIdTrabajador(tdto.getTrabajador().getIdTrabajador());
+            dto.getDueno().setEmail(tdto.getTrabajador().getEmail());
             RestauranteDTO rdto = (RestauranteDTO) sesionOk.getAttribute("restaurante");
-            dto.getRestaurante().setIdRestaurante(rdto.getRestaurante().getIdRestaurante());
+            rdto.getRestaurante().setNombreRestaurante(nombre);
+            
             try{
                 RestauranteDAO dao = new RestauranteDAO();
                 dao.update(dto);
                 sesionOk.setAttribute("restaurante", rdto);
-                response.sendRedirect("datos.html");
+                response.sendRedirect("datos.jsp");
             }catch(Exception e){
                 e.printStackTrace();
             }

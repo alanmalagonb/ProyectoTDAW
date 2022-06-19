@@ -4,6 +4,7 @@
     Author     : alanm
 --%>
 
+<%@page import="escom.ipn.restaurantes.data.dto.TrabajadorDTO"%>
 <%@page import="escom.ipn.restaurantes.data.dto.RestauranteDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -51,7 +52,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="panel.jsp">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Panel de control</span></a>
             </li>
@@ -66,7 +67,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="./datos.html" data-toggle="collapse" data-target="#collapseTwo"
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fa-solid fa-database"></i>
                     <span>Datos</span>
@@ -74,7 +75,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones</h6>
-                        <a class="collapse-item" href="#">Datos</a>
+                        <a class="collapse-item" href="datos.jsp">Datos</a>
                     </div>
                 </div>
             </li>
@@ -90,7 +91,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones</h6>
-                        <a class="collapse-item" href="#">Sucursales</a>
+                        <a class="collapse-item" href="sucursales.jsp">Sucursales</a>
                     </div>
                 </div>
             </li>
@@ -104,27 +105,27 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones</h6>
-                        <a class="collapse-item" href="#">Inventario</a>
+                        <a class="collapse-item" href="inventario.jsp">Inventario</a>
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="receta.jsp">
                     <i class="fa-solid fa-file-waveform"></i>
                     <span>Receta</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="menu.jsp">
                     <i class="fa-solid fa-burger"></i>
                     <span>Menu</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="trabajadores.jsp">
                     <i class="fa-solid fa-users-line"></i>
                     <span>Trabajadores</span></a>
             </li>
@@ -184,31 +185,24 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Juan Pérez</span>
+                                <%
+                                    HttpSession sesion = request.getSession();
+                                TrabajadorDTO tdto = new TrabajadorDTO();
+                                tdto = (TrabajadorDTO) sesion.getAttribute("user");
+                                
+                                %>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%= tdto.getTrabajador().getNombreTrabajador() %></span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
-                            <!-- <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="CerrarSesion" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    Cerrar Sesión
                                 </a>
-                            </div> -->
+                            </div> 
                         </li>
 
                     </ul>
@@ -222,7 +216,7 @@
                     <div class="row">
                         <form method="POST" action="ActualizarRestaurante">
                             <%
-                                HttpSession sesion = request.getSession();
+                                
                                 RestauranteDTO rdto = new RestauranteDTO();
                                 
                                     rdto = (RestauranteDTO) sesion.getAttribute("restaurante");
@@ -265,15 +259,15 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Seguro que quieres cerrar la sesión?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Selecciona salir si estas seguro de salir de la sesión</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="login.html">Salir</a>
                 </div>
             </div>
         </div>

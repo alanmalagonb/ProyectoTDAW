@@ -40,12 +40,18 @@ public class IniciarSesion extends HttpServlet {
             dto.getTrabajador().setPassword(password);
             try{
                 TrabajadorDAO dao = new TrabajadorDAO();
-                dto = dao.login(dto);
-                if(dto == null){
+                boolean lol = dao.login(dto);
+                
+                out.println(lol);
+                
+                if(!lol){
                     response.sendRedirect("login.html");
                 } else{
+                    dto = dao.get(dto);
+                    out.println(dto);
                     HttpSession session = request.getSession(true);
                     session.setAttribute("user", dto);
+                    out.println(dto);
                     if(dto.getRol().getIdRol() == 1){
                         
                         RestauranteDAO rdao = new RestauranteDAO();

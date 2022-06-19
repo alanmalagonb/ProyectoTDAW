@@ -17,8 +17,11 @@ public class TrabajadorDAO extends Connector implements DAO<TrabajadorDTO>{
     private static final String SQL_UPDATE="UPDATE TRABAJADOR SET nombretrabajador=?,apellidopaterno=?,apellidomaterno=?,fechanacimiento=?,email=?,password=?,calle=?,colonia=?,numeroexterior=?,telefono=?,numerointerior=?,idmunicipio=?,idestado=? inner join rol on trabajador.idrol=rol.idrol WHERE idTrabajador=?";
         private static final String SQL_UPDATE_W="UPDATE TRABAJADOR SET idsucursal=?,idrol=? where email=?";
 
+        private static final String SQL_READ_PASSWORD="SELECT password FROM TRABAJADOR where email=?";
+            private static final String SQL_READ_OWNER="SELECT trabajador.*,rol.nombrerol FROM TRABAJADOR inner join rol on trabajador.idrol=rol.idrol where trabajador.email=?";
+
     private static final String SQL_READ="SELECT trabajador.*,sucursal.nombresucursal,rol.nombrerol FROM TRABAJADOR inner join sucursal on trabajador.idsucursal=sucursal.idsucursal inner join restaurante on sucursal.idrestaurante=restaurante.idrestaurante inner join rol on trabajador.idrol=rol.idrol where trabajador.email=?";
-    private static final String SQL_REGISTER="INSERT INTO TRABAJADOR (nombretrabajador,apellidopaterno,apellidomaterno,email,password,idRol) VALUES (?,?,?,?,?,?)";
+    private static final String SQL_REGISTER="INSERT INTO TRABAJADOR (nombretrabajador,apellidopaterno,apellidomaterno,email,password,idrol) VALUES (?,?,?,?,?,?)";
     private static final String SQL_EMPLEAR="UPDATE TRABAJADOR set idSucursal=?,idRol=? WHERE idTrabajador=(SELECT idTrabajador FROM trabajador WHERE email=?)";
     private static final String SQL_READ_ALL="SELECT trabajador.*,sucursal.nombresucursal,rol.nombrerol FROM TRABAJADOR inner join sucursal on trabajador.idsucursal=sucursal.idsucursal inner join rol on trabajador.idrol=rol.idrol";
     private static final String SQL_READ_ALL_SUCURSAL="SELECT trabajador.*,sucursal.nombresucursal,rol.nombrerol FROM TRABAJADOR inner join sucursal on trabajador.idsucursal=sucursal.idsucursal inner join restaurante on sucursal.idrestaurante=restaurante.idrestaurante inner join rol on trabajador.idrol=rol.idrol where restaurante.idRestaurante = ?";
@@ -32,20 +35,23 @@ public class TrabajadorDAO extends Connector implements DAO<TrabajadorDTO>{
              ps.setString(4, dto.getTrabajador().getEmail());
              ps.setString(5, dto.getTrabajador().getPassword());
              ps.setInt(6, dto.getRol().getIdRol());
-            int executed = ps.executeUpdate();
-            if(executed > 0){
-                return get(dto);
-            }
+             ps.executeUpdate();
+             return get(dto);
         } 
-        return null; 
     }
     
-    public TrabajadorDTO login(TrabajadorDTO dto) throws SQLException {
-        TrabajadorDTO trabajador = get(dto);
-        if(trabajador.getTrabajador().getPassword().equals(dto.getTrabajador().getPassword())){
-            return trabajador;
-        }
-        return null;
+    public boolean login(TrabajadorDTO dto) throws SQLException {
+        
+        try (Connection connection = getConnection(); PreparedStatement ps = connection.prepareStatement(SQL_READ_PASSWORD)){
+             ps.setString(1, dto.getTrabajador().getEmail());
+             try (ResultSet rs = ps.executeQuery()){
+                rs.next();
+                String password = rs.getString("password");
+                if(password.equals(dto.getTrabajador().getPassword())) return true;
+            }
+        } 
+        
+        return false;
     }
     
     public void emplearSucursal(TrabajadorDTO dto) throws SQLException{
@@ -79,6 +85,20 @@ public class TrabajadorDAO extends Connector implements DAO<TrabajadorDTO>{
     
     @Override
     public TrabajadorDTO get(TrabajadorDTO dto) throws SQLException {
+        TrabajadorDTO trabajador = new TrabajadorDTO();
+        try (Connection connection = getConnection(); PreparedStatement ps = connection.prepareStatement(SQL_READ_OWNER)){
+            ps.setString(1, dto.getTrabajador().getEmail());    
+            try (ResultSet rs = ps.executeQuery()){
+                List<TrabajadorDTO> results = getResults(rs);   
+                if(!results.isEmpty()){
+                    trabajador = results.get(0);
+                }
+            }
+        }             
+        return trabajador; 
+    }
+    
+    public TrabajadorDTO getS(TrabajadorDTO dto) throws SQLException {
         TrabajadorDTO trabajador = new TrabajadorDTO();
         try (Connection connection = getConnection(); PreparedStatement ps = connection.prepareStatement(SQL_READ)){
             ps.setString(1, dto.getTrabajador().getEmail());    
@@ -146,8 +166,10 @@ public class TrabajadorDAO extends Connector implements DAO<TrabajadorDTO>{
             dto.getTrabajador().setNombreTrabajador(rs.getString("nombretrabajador"));
             dto.getRol().setIdRol(rs.getInt("idrol"));
             dto.getRol().setNombreRol(rs.getString("nombreRol"));
+            if(rs.getInt("idrol") != 1){
             dto.getSucursal().setIdSucursal(rs.getInt("idsucursal"));
             dto.getSucursal().setNombreSucursal(rs.getString("nombresucursal"));
+            }
             resultado.add(dto);
         }
         return resultado;

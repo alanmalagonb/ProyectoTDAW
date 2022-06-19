@@ -60,7 +60,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="panel.jsp">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Panel de control</span></a>
             </li>
@@ -83,7 +83,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones</h6>
-                        <a class="collapse-item" href="datos.html">Datos</a>
+                        <a class="collapse-item" href="datos.jsp">Datos</a>
                     </div>
                 </div>
             </li>
@@ -99,7 +99,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones</h6>
-                        <a class="collapse-item" href="sucursales.html">Sucursales</a>
+                        <a class="collapse-item" href="sucursales.jsp">Sucursales</a>
                     </div>
                 </div>
             </li>
@@ -113,27 +113,27 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones</h6>
-                        <a class="collapse-item" href="inventario.html">Inventario</a>
+                        <a class="collapse-item" href="inventario.jsp">Inventario</a>
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="receta.html">
+                <a class="nav-link" href="receta.jsp">
                     <i class="fa-solid fa-file-waveform"></i>
                     <span>Receta</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="menu.html">
+                <a class="nav-link" href="menu.jsp">
                     <i class="fa-solid fa-burger"></i>
                     <span>Menu</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="trabajadores.html">
+                <a class="nav-link" href="trabajadores.jsp">
                     <i class="fa-solid fa-users-line"></i>
                     <span>Trabajadores</span></a>
             </li>
@@ -165,42 +165,58 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Juan Pérez</span>
+                                <%
+                                    HttpSession sesion = request.getSession();
+                                TrabajadorDTO tdto = new TrabajadorDTO();
+                                tdto = (TrabajadorDTO) sesion.getAttribute("user");
+                                
+                                %>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%= tdto.getTrabajador().getNombreTrabajador() %></span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
-                            <!-- <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="CerrarSesion" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    Cerrar Sesión
                                 </a>
-                            </div> -->
+                            </div> 
                         </li>
 
                     </ul>
 
                 </nav>
                 <!-- End of Topbar -->
-
                 <!-- Begin Page Content -->
                 <div class="container-fluid" style="display: flex; flex-direction: column; align-items: center; max-width: 60vw;">
                     <!-- Content Row -->
@@ -209,7 +225,6 @@
                             <div class="mb-3">
                                   <% 
                                     SucursalDAO dao = new SucursalDAO();
-                                    HttpSession sesion = request.getSession();
                                     TrabajadorDTO dto = (TrabajadorDTO)sesion.getAttribute("user");
                                     RestauranteDTO rdto = new RestauranteDTO();
                                     rdto = (RestauranteDTO) sesion.getAttribute("restaurante");
